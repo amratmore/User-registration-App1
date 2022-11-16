@@ -1,7 +1,17 @@
 <div class="container">
-  <!--<app-home></app-home>-->
-  <app-user-dashboard></app-user-dashboard>
+  <!--<app-home></app-home>
+  <app-user-dashboard></app-user-dashboard>-->
+
   
 </div>
 
+<router-outlet></router-outlet>
+
+<nav>
+  <ul>
+    <li><a routerLink="/HomeComponent" routerLinkActive="active" ariaCurrentWhenActive="page">Wel-come to user page</a></li>
+    <!--<li><a routerLink="/UserDashboardComponent" routerLinkActive="active" ariaCurrentWhenActive="page">UserDashboard</a></li>-->
+  </ul>
+</nav>
+<!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>

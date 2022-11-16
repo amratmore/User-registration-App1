@@ -4,8 +4,8 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  // {path:''  , redirectTo:'/Dashboard' , pathMatch:'full'} ,
-  // {path:'/Dashboard' , component : UserDashboardComponent}
+  { path: 'UserDashboardComponent', component: UserDashboardComponent },
+  { path: 'HomeComponent', component: HomeComponent },
 ];
 
 @NgModule({

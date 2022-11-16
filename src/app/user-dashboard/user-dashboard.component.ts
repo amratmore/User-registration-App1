@@ -1,18 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder , FormGroup} from '@angular/forms';
+import { FormBuilder , FormGroup, Validators} from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { UserModel } from './user.model';
+
+import { FormControl } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
+
+
 export class UserDashboardComponent implements OnInit {
 
   formValue!: FormGroup; 
 
   userobj:UserModel = new UserModel;
+
+  userdata: any ={};
+
+  
 
   alluser: any;
 
@@ -25,7 +35,18 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      name:[''],
+      /*firstname:(["",Validators.required,Validators.pattern('[a-zA-Z].*')]),
+      age:(['',Validators.required]),
+      email:(['',Validators.email,Validators.required]),
+      address:(['',Validators.required]),
+      city:(['',Validators.required]),
+      phone:(['',Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern('[0,9].*')]),
+      middlename:(['',Validators.required,Validators.pattern('[a-zA-Z].*')]),
+      lastname:(['',Validators.required,Validators.pattern('[a-zA-Z].*')]),
+      pincode:(['',Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern('[0,9].*')]),*/
+      //state:(['',Validators.required]),
+
+      firstname:[''],
       age:[''],
       email:[''],
       address:[''],
@@ -34,8 +55,9 @@ export class UserDashboardComponent implements OnInit {
       middlename:[''],
       lastname:[''],
       pincode:[''],
+      state:[''],
+      countrycode:[''],
 
-      
     })
     this.AllUser();
   }
@@ -43,13 +65,15 @@ export class UserDashboardComponent implements OnInit {
   AddUser(){
     this.userobj.address = this.formValue.value.address;
     this.userobj.city = this.formValue.value.city;
-    this.userobj.name = this.formValue.value.name;
+    this.userobj.firstname = this.formValue.value.firstname;
     this.userobj.email = this.formValue.value.email;
     this.userobj.phone = this.formValue.value.phone;
     this.userobj.age = this.formValue.value.age;
     this.userobj.middlename = this.formValue.value.middlename;
     this.userobj.lastname = this.formValue.value.lastname;
     this.userobj.pincode = this.formValue.value.pincode
+    this.userobj.state = this.formValue.value.state
+    this.userobj.countrycode = this.formValue.value.countrycode
 
     this.api.postUser(this.userobj).subscribe({
       next: (v) => {console.log(v)},
@@ -72,7 +96,7 @@ export class UserDashboardComponent implements OnInit {
   }
 
   EditUser(data:any){
-    this.formValue.controls['name'].setValue(data.name);
+    this.formValue.controls['firstname'].setValue(data.firstname);
     this.formValue.controls['city'].setValue(data.city);
     this.formValue.controls['address'].setValue(data.address);
     this.formValue.controls['email'].setValue(data.email);
@@ -82,6 +106,8 @@ export class UserDashboardComponent implements OnInit {
     this.formValue.controls['middlename'].setValue(data.middlename);
     this.formValue.controls['lastname'].setValue(data.lastname);
     this.formValue.controls['pincode'].setValue(data.pincode);
+    this.formValue.controls['state'].setValue(data.state);
+    this.formValue.controls['countrycode'].setValue(data.countrycode);
     this.userobj.id = data.id;
     this.UpdateShowBtn();
   }
@@ -89,13 +115,15 @@ export class UserDashboardComponent implements OnInit {
   UpdateUser(){
     this.userobj.address = this.formValue.value.address;
     this.userobj.city = this.formValue.value.city;
-    this.userobj.name = this.formValue.value.name;
+    this.userobj.firstname = this.formValue.value.firstname;
     this.userobj.email = this.formValue.value.email;
     this.userobj.age = this.formValue.value.age;
     this.userobj.phone = this.formValue.value.phone;
     this.userobj.middlename = this.formValue.value.middlename;
     this.userobj.lastname = this.formValue.value.lastname;
     this.userobj.pincode = this.formValue.value.pincode;
+    this.userobj.state = this.formValue.value.state;
+    this.userobj.countrycode = this.formValue.value.countrycode;
     this.api.putUser(this.userobj,this.userobj.id).subscribe(res => {
       alert("Data Updated");
       this.AllUser();
