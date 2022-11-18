@@ -1,0 +1,20 @@
+.box{
+    display: flex;
+    margin: 10%;
+
+}
+
+.block > img{
+height: 200px;
+border-radius: 20px;
+margin-bottom: 20px;
+}
+
+.block{
+    background-color: rgba(249, 216, 216, 0.834);
+    display: flex;
+    padding: 10px;
+    border-radius: 20px;
+    flex-direction: column;
+    margin: 20px;
+}

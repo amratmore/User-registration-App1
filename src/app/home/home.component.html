@@ -1,17 +1,35 @@
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Wel-Come</a>
+      <a class="navbar-brand" href="/HomeComponent"  >User Registration</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>      
-        <div class="d-flex"> 
+        <!-- <div class="d-flex"> 
+          <button class="btn btn-success" type="submit"  routerLink="/UserDashboardComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">List</button>
+           -->
           <!-- <a routerLink="/UserDashboardComponent" routerLinkActive="active" ariaCurrentWhenActive="page">UserDashboard</a>        -->
-          <!-- <button class="btn btn-success" type="submit"  routerLink="/UserDashboardComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</button> -->
-        </div>
+          <!-- <button class="btn btn-success" type="submit"  routerLink="/AddUserComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">New User Registration </button>
+        </div> -->
       </div>
     <div>      
     <div class="d-flex">        
-      <button class="btn btn-success" type="submit"  routerLink="/UserDashboardComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">List</button>
+      <!-- <button class="btn btn-success" type="submit"  routerLink="/UserDashboardComponent" data-bs-toggle="modal" data-bs-target="#exampleModal">List</button> -->
     </div>
   </div>
   </nav>
+
+
+  <div class="box">
+    <div class="block" routerLink="/UserDashboardComponent">
+      <img src="https://i.pngimg.me/thumb/f/720/bf5a3331a196408aa082.jpg" alt="">
+      List
+    </div>
+
+    <div class="block" routerLink="/AddUserComponent">
+      <img src="https://st4.depositphotos.com/12780408/25664/v/450/depositphotos_256647162-stock-illustration-add-new-user-line-icon.jpg" alt="">
+      New User Registration
+    </div>
+  </div>
+  

@@ -1,55 +1,19 @@
+
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/HomeComponent" >Registred User's</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>      
-        <div class="d-flex">        
-          <!-- <button class="btn btn-success" type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</button> -->
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/HomeComponent">User Registration</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>      
+      <div class="d-flex">        
+         <!-- <button class="btn btn-success" type="submit"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add User</button> -->
       </div>
-  </nav>
-<table class="table table-striped">
-<thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Age</th>
-        <th>phone</th>
-        <th>Email Id</th>
-        <th>Address</th>
-        <th>Action</th>
-    </tr>
-</thead>
-<tbody>
-    <tr *ngFor="let user of alluser">
-        <td>{{user.id}}</td>
-        <td>{{user.firstname}} {{user.middlename}} {{user.lastname}} </td>
-        <td>{{user.age}}</td>
-        <td>{{user.countrycode}} {{user.phone}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.address}} {{user.city}} {{user.state}}- {{user.pincode}}</td>
-        <td>
-            <input type="button" value="Edit" (click)="EditUser(user)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success me-2"/>
-            <input type="button" value="Delete" (click)="DeleteUser(user)" class="btn btn-danger"/>
-            
-
-        </td>
-    </tr>
-</tbody>
-</table>
-
-
-
-
-<!-- Button trigger modal -->
-<!-- Button trigger modal -->
-
+    </div>
+</nav>
+<!-- Modal -->
   
-  <!-- Modal -->
-  
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div >
+    <div class="">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Registration Page</h5>
@@ -385,9 +349,9 @@
               </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-warning" href="/HomeComponent"  data-bs-dismiss="modal">Close</button>
           <button *ngIf="btnSaveShow" type="button" class="btn btn-primary" (click)="AddUser()" data-bs-dismiss="modal" >Register</button>         
-            <button type="button" class="btn btn-secondary" (click)="AddUser()" data-bs-dismiss="modal" >Update</button>
+            <!-- <button type="button" class="btn btn-secondary" (click)="AddUser()" data-bs-dismiss="modal" >Update</button> -->
 
         </div>
       </div>

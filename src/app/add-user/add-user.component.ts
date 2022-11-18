@@ -1,3 +1,18 @@
+// import { Component, OnInit } from '@angular/core';
+
+// @Component({
+//   selector: 'app-add-user',
+//   templateUrl: './add-user.component.html',
+//   styleUrls: ['./add-user.component.css']
+// })
+// export class AddUserComponent implements OnInit {
+
+//   constructor() { }
+
+//   ngOnInit(): void {
+//   }
+
+// }
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder , FormGroup, Validators} from '@angular/forms';
 import { ApiService } from '../shared/api.service';
@@ -8,13 +23,13 @@ import { FormControl } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-user-dashboard',
-  templateUrl: './user-dashboard.component.html',
-  styleUrls: ['./user-dashboard.component.css']
+  selector: 'app-add-user-component',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.css']
 })
 
 
-export class UserDashboardComponent implements OnInit {
+export class AddUserComponent implements OnInit {
 
   formValue!: FormGroup; 
 
@@ -156,3 +171,4 @@ export class UserDashboardComponent implements OnInit {
 
 
 }
+
