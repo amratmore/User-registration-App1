@@ -1,24 +1,13 @@
-// import { Component, OnInit } from '@angular/core';
 
-// @Component({
-//   selector: 'app-add-user',
-//   templateUrl: './add-user.component.html',
-//   styleUrls: ['./add-user.component.css']
-// })
-// export class AddUserComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder , FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { UserModel } from './user.model';
-
+import { Router, ActivatedRoute } from '@angular/router'
 import { FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+
+
 
 
 
@@ -31,53 +20,104 @@ import { FormControl } from '@angular/forms';
 
 export class AddUserComponent implements OnInit {
 
-  formValue!: FormGroup; 
-
-  userobj:UserModel = new UserModel;
-
-  userdata: any ={};
-
+  formValue!: FormGroup;
+  id!: number
+  userobj: UserModel = new UserModel;
+  isInAddMode!: boolean;
+  state: any;
+  countryCode: any;
   
-
+  userdata: any = {};
+  isadded!: boolean;
   alluser: any;
 
-  btnUpdateShow:boolean = false;
 
-  btnSaveShow:boolean = true;
+  btnUpdateShow: boolean = false;
 
+  btnSaveShow: boolean = true;
 
-  constructor(private formBuilder:FormBuilder, private api:ApiService ) { }
+  constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      // firstname:(["",Validators.required,Validators.pattern('[a-zA-Z].*')]),
-      // age:(['',Validators.required]),
-      // email:(['',Validators.email,Validators.required]),
-      // address:(['',Validators.required]),
-      // city:(['',Validators.required]),
-      // phone:(['',Validators.required,Validators.minLength(10),Validators.maxLength(10),Validators.pattern('[0,9].*')]),
-      // middlename:(['',Validators.required,Validators.pattern('[a-zA-Z].*')]),
-      // lastname:(['',Validators.required,Validators.pattern('[a-zA-Z].*')]),
-      // pincode:(['',Validators.required,Validators.minLength(6),Validators.maxLength(6),Validators.pattern('[0,9].*')]),
-      // state:(['',Validators.required]),
+      firstname: (['', Validators.required,  ]),
+      middlename: (['', Validators.required, ]),
+      lastname: (['', Validators.required, ]),
+       age: (['', Validators.required, ]),
+       phone: (['', [Validators.required, ]]),
+      // email: (['', Validators.email, Validators.required]),
+      address: (['', Validators.required]),
+      city: (['', Validators.required]),
+      // countryCode: (['', Validators.required]),
+      // state: (['', Validators.required]),
+      pincode: (['', Validators.required, ]),
 
-      firstname:[''],
-      age:[''],
+
+
+      // firstname:[''],
+      // age:[''],
       email:[''],
-      address:[''],
-      city:[''],
-      phone:[''],
-      middlename:[''],
-      lastname:[''],
-      pincode:[''],
+      // address:[''],
+      // city:[''],
+      // phone:[''],
+      // middlename:[''],
+      // lastname:[''],
+      // pincode:[''],
       state:[''],
       countrycode:[''],
 
     })
+
+
     this.AllUser();
+    this.AllCountry();
+    this.AllState();
+    console.log("country :", this.countryCode)
+  }
+  untouched(data){
+    return data.touched
+  }
+  
+  // get p(){
+  //   return this.formValue.controls;
+  // }
+
+  get firstname() {
+    return this.formValue.get('firstname');
+  }
+  get middlename() {
+    return this.formValue.get('middlename');
+  }
+  get lastname() {
+    return this.formValue.get('lastname');
+  }
+  get age() {
+    return this.formValue.get('age');
+  }
+  get email() {
+    return this.formValue.get('email');
+  }
+  get countrycode() {
+    return this.formValue.get('countrycode');
+  }
+  get phone() {
+    return this.formValue.get('phone');
+  }
+  get address() {
+    return this.formValue.get('address');
+  }
+  get city() {
+    return this.formValue.get('city');
+  }
+  get states() {
+    return this.formValue.get('state');
+  }
+  get pincode() {
+    return this.formValue.get('pincode')
   }
 
-  AddUser(){
+
+  AddUser() {
     this.userobj.address = this.formValue.value.address;
     this.userobj.city = this.formValue.value.city;
     this.userobj.firstname = this.formValue.value.firstname;
@@ -91,79 +131,46 @@ export class AddUserComponent implements OnInit {
     this.userobj.countrycode = this.formValue.value.countrycode
 
     this.api.postUser(this.userobj).subscribe({
-      next: (v) => {console.log(v)},
-    error: (e) => {
-      alert("Error")
-      console.log(e)},
-    complete: () => {
-      console.log('complete')
-      alert("Data Saved")
-      this.AllUser();
-      this.formValue.reset();
-    } })
+      next: (v) => { console.log(v) },
+      error: (e) => {
+        alert("Error")
+        console.log(e)
+      },
+      complete: () => {
+        this.isadded = true;
+        setTimeout((isadded) => {
+          this.isadded = false
+        }, 3000);
+        // console.log('complete')
+        // alert("Data Saved")
+        this.AllUser();
+        this.formValue.reset();
+      }
+    })
 
   }
 
-  AllUser(){
+  AllUser() {
     this.api.getUser().subscribe(res => {
       this.alluser = res;
     })
   }
-
-  EditUser(data:any){
-    this.formValue.controls['firstname'].setValue(data.firstname);
-    this.formValue.controls['city'].setValue(data.city);
-    this.formValue.controls['address'].setValue(data.address);
-    this.formValue.controls['email'].setValue(data.email);
-    this.formValue.controls['class'].setValue(data.class);
-    this.formValue.controls['phone'].setValue(data.phone);
-    this.formValue.controls['age'].setValue(data.age);
-    this.formValue.controls['middlename'].setValue(data.middlename);
-    this.formValue.controls['lastname'].setValue(data.lastname);
-    this.formValue.controls['pincode'].setValue(data.pincode);
-    this.formValue.controls['state'].setValue(data.state);
-    this.formValue.controls['countrycode'].setValue(data.countrycode);
-    this.userobj.id = data.id;
-    this.UpdateShowBtn();
-  }
-
-  UpdateUser(){
-    this.userobj.address = this.formValue.value.address;
-    this.userobj.city = this.formValue.value.city;
-    this.userobj.firstname = this.formValue.value.firstname;
-    this.userobj.email = this.formValue.value.email;
-    this.userobj.age = this.formValue.value.age;
-    this.userobj.phone = this.formValue.value.phone;
-    this.userobj.middlename = this.formValue.value.middlename;
-    this.userobj.lastname = this.formValue.value.lastname;
-    this.userobj.pincode = this.formValue.value.pincode;
-    this.userobj.state = this.formValue.value.state;
-    this.userobj.countrycode = this.formValue.value.countrycode;
-    this.api.putUser(this.userobj,this.userobj.id).subscribe(res => {
-      alert("Data Updated");
-      this.AllUser();
-      this.SaveShowBtn();
+  AllCountry() {
+    this.api.getcountrycode().subscribe(res => {
+      this.countryCode = res
     })
-
-
   }
-
-
-  DeleteUser(data:any){
-    this.api.deleteUser(data.id).subscribe(res => {
-      alert("Record Deleted");
-      this.AllUser();
+  AllState() {
+    this.api.getstate().subscribe(res => {
+      this.state = res
     })
-
   }
 
-  UpdateShowBtn()
-  {
+  UpdateShowBtn() {
     this.btnUpdateShow = true;
     this.btnSaveShow = false;
   }
-  SaveShowBtn()
-  {
+  SaveShowBtn() {
     this.btnUpdateShow = false;
     this.btnSaveShow = true;
   }

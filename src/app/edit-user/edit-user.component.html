@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/HomeComponent">User Registration</a>
+    <a class="navbar-brand" href="/HomeComponent">Edit User Details</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>      
@@ -11,150 +11,122 @@
     </div>
 </nav>
 <!-- Modal -->
-
-<section *ngIf="isadded">
-  <div class="square_box box_three"></div>
-  <div class="square_box box_four"></div>
-  <div class="container mt-5">
-    <div class="row">
-
-      <div class="col-sm-12">
-        <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
-          <i class="start-icon far fa-check-circle faa-tada animated"></i>
-          <strong class="font__weight-semibold">Well done!</strong> Your record is added successfully.
+  
+<section *ngIf="isedited">
+  <div class="square_box box_three">
+    <div class="square_box box_four">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert fade alert-simple alert-success alert-dismissible text-left font__family-montserrat font__size-16 font__weight-light brk-library-rendered rendered show">
+              <i class="start-icon far fa-check-circle faa-tada animated"></i>
+              <strong class="font__weight-semibold">Well done!</strong> You successfully edited the data.
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  </section>
-  
+</section>
 <div >
     <div class="">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Registration Page</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <a href="/HomeComponent"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></a>
         </div>
-
-                                     <!-- First Name -->
         <div class="modal-body">
             <form class="row g-3" [formGroup]="formValue">
                 <div class="col-md-6">
                     <label for="inputName" class="form-label">First Name</label>
                     <input type="text" formControlName="firstname" class="form-control" id="inputName">
-                    <div *ngIf="!firstname?.untouched && firstname?.invalid" class="alert alert-danger">First name is required
-                  <!-- <div *ngIf="!firstname?.valid && middlename?.untouched">First name is required</div>  -->
-                   
-                     <!-- <div *ngIf="!firstname?.hasError('pattern')">Enter Valid First Name</div>  -->
-                    </div>
-                  </div> 
-
-                                      <!-- Middle Name -->
+                    <div *ngIf="!firstname?.untouched && firstname?.invalid" class="alert alert-danger">First name is required</div>
+                    <!--<div class="form-text text-danger" *ngIf="FirstName.errors?.['required']
+                    && (FirstName.touched || FirstName.dirty)">
+                    First Name is Required.
+                  </div>-->
+                  </div>
                   <div class="col-md-6">
                     <label for="inputName" class="form-label">Middle Name</label>
                     <input type="text" formControlName="middlename" class="form-control" id="inputName">
-                    
                     <div *ngIf="!middlename?.untouched && middlename?.invalid" class="alert alert-danger">Middle name is required
-                     </div> 
-                  <!-- <div *ngIf="middlename?.hasError('pattern') ">Enter Valid Middle Name
-                  </div> --> 
+                    </div> 
+                    <!--<div class="form-text text-danger" *ngIf="middlename.errors?.['required']
+                    && (middlename.touched || middlename.dirty)">
+                    First Name is Required.
+                  </div>-->
                   </div>
-                                    
-                                           <!-- last Name -->
                   <div class="col-md-6">
                     <label for="inputName" class="form-label">Last Name</label>
                     <input type="text" formControlName="lastname" class="form-control" id="inputName">
                     <div *ngIf="!lastname?.untouched && lastname?.invalid" class="alert alert-danger">Last name is required
-                     </div> 
-                    <!-- <div *ngIf="lastname?.hasError('pattern') ">Enter Valid Last Name
-                    </div> --> 
+                    </div> 
                   </div>
-                                              <!-- Age -->
                   <div class="col-md-6">
                     <label for="inputName" class="form-label">Age</label>
                     <input type="number" formControlName="age" class="form-control" id="inputName">
                     <div *ngIf="!age?.untouched && age?.invalid" class="alert alert-danger">
-                     Enter Your Age.
-                     </div> 
-                        <!-- <div *ngIf="age?.hasError('min')">Your age must be greater than or equal to 18</div>
-                        <div *ngIf="age?.hasError('max')">Your age must be less than or equal to 60</div> --> 
+                      Enter Your Age.
+                      </div> 
                   </div>
              
-
-                                              <!-- Country Code -->
                   <div class="col-6">
-                   <label for="inputcountrycode" class="form-label">Country Code  </label>
+                    <label for="inputcountrycode" class="form-label">Country Code  </label>
                     <select class="form-control" formControlName="countrycode" id="inputName" >
                     <option *ngFor="let a of countryCode">{{a.name}} ({{a.dial_code}})</option>
-                    </select>      
-                    <!-- <div *ngIf="countrycode?.hasError('required') ">Enter your area code</div>        -->
-                  </div> 
-                  
-                                              <!-- Phone No. -->
+                  </select>             
+                  </div>
+  
                   
                   <div class="col-md-6">
                     <label for="inputName" class="form-label">Phone</label>
-                    <input type="number" formControlName="phone" class="form-control mb-3" id="inputName">
-                       
+                    <input type="number" formControlName="phone" class="form-control" id="inputName">
                     <div *ngIf="!phone?.untouched && phone?.invalid" class="alert alert-danger">
-                    Enter Your Phone Number.
-                   </div> 
-                    <!-- <div *ngIf="p.phone.touched && p.phone.invalid" class="alert alert-danger">
-                      <div *ngIf="p.phone.errors?.required">Mobile number is required</div>
-                      <div *ngIf="p.phone.errors?.pattern">Provide 10 digit phone number</div> -->
+                      Enter Your Phone Number.
+                     </div> 
                   </div>
 
-                                         <!-- Email -->
+                  
                   
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">Email</label>
                   <input type="email" formControlName="email" class="form-control" id="inputEmail" placeholder="Enter your Email">
-                  <!-- <div *ngIf="email?.hasError('required')">Enter your email</div>
-                  <div *ngIf="email?.hasError('email')">Please, Enter a valid email</div> -->
                 </div>
-                                              
-                                            <!-- Address -->
+                
                 <div class="col-12">
                   <label for="inputAddress" class="form-label">Address</label>
                   <input type="text" class="form-control" formControlName="address" id="inputAddress" placeholder="1234 Main St">
                   <div *ngIf="!address?.untouched && address?.invalid" class="alert alert-danger">Enter Your Address.</div>
-                  <!-- <div *ngIf="address?.hasError('required') ">Enter your  Address</div> -->
                 </div>
-
-                                               <!-- City -->
                 <div class="col-12">
                   <label for="inputCity" class="form-label">City</label>
                   <input type="text" class="form-control" id="inputAddress2" formControlName="city" placeholder="Enter your city name">
                   <div *ngIf="!city?.untouched && city?.invalid" class="alert alert-danger">Enter Your City Name </div>
-                  <!-- <div *ngIf="city?.hasError('required') ">Enter your City</div> -->
                 </div> 
+        
                 
-                                               <!-- State -->
                 <div class="col-12">
                   <label for="inputstate" class="form-label">State  </label>
-  <select type="text" class="form-control" formControlName="state" id="inputName" >
-    <option *ngFor="let s of state">{{s}}</option>
-    </select>     
-    <!-- <div *ngIf="state?.hasError('required')">Enter your State</div>          -->
-</div>
+                  <select type="text" class="form-control" formControlName="state" id="inputName" >
+                    <option *ngFor="let s of state">{{s}}</option>
+                  
 
-                                          <!-- Pincode -->
+
+</select>
+</div>
                 <div class="col-12">
                   <label for="inputCity" class="form-label">PinCode</label>
                   <input type="number" class="form-control" id="inputAddress2" formControlName="pincode" placeholder="Enter your pincode">
-                     
                   <div *ngIf="!pincode?.untouched && pincode?.invalid" class="alert alert-danger">
                     Pincode is Required.
                    </div> 
-                  <!-- <div *ngIf="pincode?.hasError('required') ">Enter your Pincode</div>
-                        <div *ngIf="pincode?.hasError('pattern')">Enter a valid pincode</div>-->
                 </div>
               </form>
         </div>
-                                  <!-- Button -->
         <div class="modal-footer">
-          <a href="/HomeComponent"><button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button></a>
-          <button  [disabled]="!formValue.valid" type="button" class="btn btn-primary" (click)="AddUser()" data-bs-dismiss="modal" >Register</button>         
+          <a href="/HomeComponent"><button type="button" class="btn btn-warning"  data-bs-dismiss="modal">Close</button></a>
+          <button  type="button" class="btn btn-primary" routerLink="/UserDashboardComponent"  (click)="UpdateUser()"  >Update</button> 
+            <!-- <button type="button" class="btn btn-secondary" (click)="goDashboed()" data-bs-dismiss="modal" >go to userdashbord</button> -->
 
         </div>
       </div>

@@ -20,6 +20,7 @@
     "@angular/router": "~13.1.0",
     "intl-tel-input": "^17.0.3",
     "json-server": "^0.17.1",
+    "ngx-logger": "^5.0.11",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

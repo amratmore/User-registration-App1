@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import { getTranslationDeclStmts } from '@angular/compiler/src/render3/view/template';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  edituser:any;
 
   constructor(private _http:HttpClient) { }
 
@@ -40,6 +42,26 @@ export class ApiService {
     return this._http.delete<any>("http://localhost:3000/posts/" + id).pipe(map((res:any)=> {
       return res
     }))
+  }
+
+  getstate()
+  {
+    return this._http.get<any>("http://localhost:3000/states/").pipe(map((res:any)=> {
+      return res
+    }))
+  }
+  getcountrycode()
+  {
+    return this._http.get("http://localhost:3000/countrycodes/").pipe(map((res:any)=> {
+      console.log("by api res :",res)
+      return res
+    }))
+  }
+  setEditUser(user){
+    this.edituser=user;
+  }
+  getEditUser(){
+    return this.edituser;
   }
     
 }
