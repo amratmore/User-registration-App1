@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { AddUserComponent } from './add-user/add-user.component';
+
 // import {default as database} from './database.json'
-import { LoggerModule, NgxLoggerLevel } from "ngx-logger";
-import { LogService }
-    from './shared/log.service';
-import { LogTestComponent }
-    from './log-test/log-test.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
+import { LoggingInterceptor } from './logging.interceptor';
+
+import { AddEditComponent } from './add-edit/add-edit.component';
 
 
 
@@ -24,24 +22,25 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     AppComponent,
     UserDashboardComponent,
     HomeComponent,
-    AddUserComponent,
-    LogTestComponent,
-    EditUserComponent
-    
+        AddEditComponent
+     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
-    LoggerModule.forRoot({
-      serverLoggingUrl: '/api/logs',
-      level: NgxLoggerLevel.DEBUG,
-      serverLogLevel: NgxLoggerLevel.ERROR
-    }),
+    
+     
+    
     
   ],
-  providers: [LogService],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoggingInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

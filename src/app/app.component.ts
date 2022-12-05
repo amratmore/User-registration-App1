@@ -7,8 +7,5 @@ import { NGXLogger } from "ngx-logger";
 })
 export class AppComponent {
   title = 'UserReg';
-  constructor(private logger: NGXLogger) {
-    this.logger.error("Your log message goes here");
-    this.logger.warn("Multiple", "Argument", "support");
-  }
+ 
 }

@@ -8,7 +8,12 @@ import { getTranslationDeclStmts } from '@angular/compiler/src/render3/view/temp
   providedIn: 'root'
 })
 export class ApiService {
+  getUById(id: number) {
+    throw new Error('Method not implemented.');
+  }
   edituser:any;
+  editmode:any;
+  editmsg:boolean=false;
 
   constructor(private _http:HttpClient) { }
 

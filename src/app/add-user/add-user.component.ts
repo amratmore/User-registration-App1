@@ -6,6 +6,7 @@ import { UserModel } from './user.model';
 import { Router, ActivatedRoute } from '@angular/router'
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+// import {ngToastService} from 'ngx-toaster';
 
 
 
@@ -36,7 +37,7 @@ export class AddUserComponent implements OnInit {
 
   btnSaveShow: boolean = true;
 
-  constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) { }
+  constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient, private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
@@ -149,6 +150,9 @@ export class AddUserComponent implements OnInit {
     })
 
   }
+  
+
+  
 
   AllUser() {
     this.api.getUser().subscribe(res => {
